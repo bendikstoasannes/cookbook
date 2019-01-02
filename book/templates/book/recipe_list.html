@@ -1,25 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Kokeboka</title>
-</head>
-<body>
+{% extends 'book/base.html' %}
 
-<h1><strong>Kokebok</strong></h1>
-
+{% block content %}
 {% for recipe in recipes %}
-    <div>
+    <div class="recipe">
         <h2><a href="">{{ recipe.title }}</a></h2>
-        <p>Publisert {{ recipe.published_date }}</p>
-        <ul>
-        {% for ingredient in recipe.ingredients.splitlines %}
-            <li>{{ ingredient }}</li>
-        {% endfor %}
-        </ul>
-    <p>{{ recipe.instructions | linebreaks}}</p>
+            <div class="date">
+                <p>Publisert {{ recipe.published_date }}</p>
+            </div>
+            <ul>
+            {% for ingredient in recipe.ingredients.splitlines %}
+                <li>{{ ingredient }}</li>
+            {% endfor %}
+            </ul>
+        <p>{{ recipe.instructions | linebreaks}}</p>
     </div>
 {% endfor %}
-
-</body>
-</html>
+{% endblock %}

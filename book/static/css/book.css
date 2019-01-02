@@ -1,0 +1,54 @@
+h2 a {
+    color: #ffa221;
+    font-weight: bold;
+    font-family: "Broadway";
+}
+
+h1 a {
+    color: #eee;
+    font-weight: bold;
+    font-family: "Broadway";
+}
+
+h1 a:hover {
+    text-decoration: none;
+    color: #ddd;
+}
+
+h2 a:hover {
+    text-decoration: none;
+    color: #d88f29;
+}
+
+.content {
+    margin-left: 40px;
+}
+
+.date {
+    color: #222;
+}
+
+.save {
+    float: right;
+}
+
+.top-menu .top-menu:hover .top-menu-visited {
+    color: #fff;
+    float: right;
+    font-size: 26pt;
+    margin-right: 20px;
+}
+
+.recipe {
+    margin-bottom: 70px;
+}
+
+body {
+    background-color: #eee;
+}
+
+.page-header {
+    background-color: #ffa221;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}
