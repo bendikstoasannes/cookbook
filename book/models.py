@@ -9,7 +9,7 @@ class Recipe(models.Model):
     title = models.CharField(max_length=200)
     ingredients = models.TextField(default="")
     instructions = models.TextField(default="")
-    comments = models.TextField(default="")
+
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)
 
