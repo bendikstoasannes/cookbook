@@ -3,7 +3,7 @@
 {% block content %}
 {% for recipe in recipes %}
     <div class="recipe">
-        <h2><a href="">{{ recipe.title }}</a></h2>
+        <h2><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ recipe.title }}</a></h2>
             <div class="date">
                 <p>Publisert {{ recipe.published_date }}</p>
             </div>
