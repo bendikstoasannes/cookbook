@@ -1,13 +1,19 @@
+/* BASE STYLE */
+
+a:hover {
+    text-decoration: none;
+}
+
 h2 a, h2{
     color: #ffa221;
     font-weight: bold;
-    font-family: "Broadway";
+    font-family: "Broadway", sans-serif;
 }
 
 h1 a, h1{
     color: #eee;
     font-weight: bold;
-    font-family: "Broadway";
+    font-family: "Broadway", sans-serif;
 }
 
 h1 a:hover {
@@ -20,12 +26,18 @@ h2 a:hover {
     color: #d88f29;
 }
 
+h4 {
+    font-weight: bold;
+    padding: 10px 0px 3px 0px;
+}
+
 .content {
     margin-left: 40px;
 }
 
 .date {
     color: #222;
+    font-size: 13px;
 }
 
 .save {
@@ -39,6 +51,17 @@ h2 a:hover {
     margin-right: 20px;
 }
 
+.glyphicon-plus {
+    color: #eee;
+    font-size: 20pt;
+    margin-top: 24px;
+    float: right;
+}
+
+.glyphicon-plus:hover {
+    color:#ddd;
+}
+
 .recipe {
     margin-bottom: 70px;
 }
@@ -50,5 +73,30 @@ body {
 .page-header {
     background-color: #ffa221;
     margin-top: 0;
-    padding: 20px 20px 20px 40px;
+    padding: 20px 20px 20px 50px;
+}
+
+/* INDEX STYLE */
+
+#show-all-button {
+    margin-bottom: 80px;
+    color: black;
+    font-size: 16px;
+}
+
+.glyphicon-arrow-right {
+    color: #d88f29;
+    padding: 3px;
+    font-size: 20px;
+}
+
+/* DETAIL STYLE */
+
+#edit-button {
+    float: right;
+    margin: 15px 0px 70px 0px;
+}
+
+.glyphicon-pencil {
+    margin-left: 5px;
 }

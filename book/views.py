@@ -5,6 +5,15 @@ from .forms import RecipeForm
 
 # Create your views here.
 
+def index(request):
+    recipes = Recipe.objects.filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
+    count = recipes.count()
+    if len(recipes) <= 5:
+        return render(request, 'book/index.html', {'recipes': recipes, 'count': count})
+    else:
+        return render(request, 'book/index.html', {'recipes': recipes[:5], 'count': count})
+
+
 def recipe_list(request):
     recipes = Recipe.objects.filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
     return render(request, 'book/recipe_list.html', {'recipes': recipes})

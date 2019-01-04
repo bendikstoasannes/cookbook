@@ -2,9 +2,7 @@
 
 {% block content %}
 <div class="recipe">
-    {% if user.is_authenticated %}
-        <a class="btn btn-default" href="{% url 'recipe_edit' pk=recipe.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
-    {% endif %}
+
     <h2>{{ recipe.title }}</h2>
 
     {% if recipe.published_date %}
@@ -14,16 +12,27 @@
     {% endif %}
 
     <div class="ingredients">
+        <h4>Ingredienser</h4>
         <ul>
             {% for ingredient in recipe.ingredients.splitlines %}
-                <li>{{ ingredient }}</li>
-            {% endfor %}
+                    {% if ingredient != "" %}
+                        <li>{{ ingredient }}</li>
+                    {% else %}
+                        <br>
+                    {% endif %}
+                {% endfor %}
             </ul>
     </div>
 
+    <h4>Fremgangsmåte</h4>
     <div class="instructions">
         <p>{{ recipe.instructions | linebreaks}}</p>
     </div>
+
+    {% if user.is_authenticated %}
+        <a class="btn btn-default" id="edit-button" href="{% url 'recipe_edit' pk=recipe.pk %}">
+            Rediger<span class="glyphicon glyphicon-pencil"></span></a>
+    {% endif %}
 
 </div>
 {% endblock %}

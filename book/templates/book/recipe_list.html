@@ -7,11 +7,17 @@
             <div class="date">
                 <p>Publisert {{ recipe.published_date }}</p>
             </div>
+            <h4>Ingredienser</h4>
             <ul>
             {% for ingredient in recipe.ingredients.splitlines %}
-                <li>{{ ingredient }}</li>
+                {% if ingredient != "" %}
+                    <li>{{ ingredient }}</li>
+                {% else %}
+                    <br>
+                {% endif %}
             {% endfor %}
             </ul>
+        <h4>Fremgangsmåte</h4>
         <p>{{ recipe.instructions | linebreaks}}</p>
     </div>
 {% endfor %}
