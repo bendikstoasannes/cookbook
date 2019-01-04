@@ -93,10 +93,19 @@ body {
 /* DETAIL STYLE */
 
 #edit-button {
-    float: right;
-    margin: 15px 0px 70px 0px;
+    float: left;
+    margin: 20px 5px 70px 0px;
 }
 
 .glyphicon-pencil {
+    margin-left: 5px;
+}
+
+#delete-button {
+    float: left;
+    margin: 20px 0px 70px 5px;
+}
+
+.glyphicon-remove {
     margin-left: 5px;
 }

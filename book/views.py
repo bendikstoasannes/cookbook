@@ -48,3 +48,8 @@ def recipe_edit(request, pk):
     else:
         form = RecipeForm(instance=recipe)
     return render(request, 'book/recipe_edit.html', {'form': form})
+
+def recipe_remove(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    recipe.delete()
+    return redirect('recipe_list')
