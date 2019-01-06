@@ -47,7 +47,7 @@ def recipe_edit(request, pk):
             return redirect('recipe_detail', pk=recipe.pk)
     else:
         form = RecipeForm(instance=recipe)
-    return render(request, 'book/recipe_edit.html', {'form': form})
+    return render(request, 'book/recipe_edit.html', {'form': form, 'recipe': recipe})
 
 def recipe_remove(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)

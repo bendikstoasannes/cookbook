@@ -1,9 +1,19 @@
 {% extends 'book/base.html' %}
 
 {% block content %}
-    <h2>Ny oppskrift</h2>
+    {% if recipe %}
+        <h2>{{ recipe.title }}</h2>
+    {% else %}
+        <h2>Ny oppskrift</h2>
+    {% endif %}
     <form method="POST">{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Lagre</button>
     </form>
+
+    {% if user.is_authenticated and recipe %}
+        <a class="btn btn-default" id="delete-button" href="{% url 'recipe_remove' pk=recipe.pk %}">
+            Slett<span class="glyphicon glyphicon-remove"></span></a>
+    {% endif %}
+
 {% endblock %}
