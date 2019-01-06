@@ -8,11 +8,12 @@
     {% endif %}
     <form method="POST">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Lagre</button>
+        <button type="submit" class="save btn btn-success">
+            Lagre<span class="glyphicon glyphicon-ok"></span></button>
     </form>
 
     {% if user.is_authenticated and recipe %}
-        <a class="btn btn-default" id="delete-button" href="{% url 'recipe_remove' pk=recipe.pk %}">
+        <a class="btn btn-danger" id="delete-button" href="{% url 'recipe_remove' pk=recipe.pk %}">
             Slett<span class="glyphicon glyphicon-remove"></span></a>
     {% endif %}
 

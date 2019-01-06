@@ -101,7 +101,12 @@ body {
     margin-left: 5px;
 }
 
+/* EDIT STYLE */
 
 .glyphicon-remove {
+    margin-left: 5px;
+}
+
+.glyphicon-ok {
     margin-left: 5px;
 }
