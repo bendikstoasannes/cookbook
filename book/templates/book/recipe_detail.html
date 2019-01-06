@@ -32,7 +32,6 @@
     {% if user.is_authenticated %}
         <a class="btn btn-default" id="edit-button" href="{% url 'recipe_edit' pk=recipe.pk %}">
             Rediger<span class="glyphicon glyphicon-pencil"></span></a>
-
         <a class="btn btn-default" id="delete-button" href="{% url 'recipe_remove' pk=recipe.pk %}">
             Slett<span class="glyphicon glyphicon-remove"></span></a>
     {% endif %}
