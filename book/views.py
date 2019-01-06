@@ -15,7 +15,7 @@ def index(request):
 
 
 def recipe_list(request):
-    recipes = Recipe.objects.filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
+    recipes = Recipe.objects.filter(published_date__lte=timezone.now()).order_by('title')
     return render(request, 'book/recipe_list.html', {'recipes': recipes})
 
 def recipe_detail(request, pk):

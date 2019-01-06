@@ -4,21 +4,6 @@
 {% for recipe in recipes %}
     <div class="recipe">
         <h2><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ recipe.title }}</a></h2>
-            <div class="date">
-                <p>Publisert {{ recipe.published_date }}</p>
-            </div>
-            <h4>Ingredienser</h4>
-            <ul>
-            {% for ingredient in recipe.ingredients.splitlines %}
-                {% if ingredient != "" %}
-                    <li>{{ ingredient }}</li>
-                {% else %}
-                    <br>
-                {% endif %}
-            {% endfor %}
-            </ul>
-        <h4>Fremgangsmåte</h4>
-        <p>{{ recipe.instructions | linebreaks}}</p>
     </div>
 {% endfor %}
 {% endblock %}
