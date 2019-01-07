@@ -15,6 +15,9 @@
     {% if user.is_authenticated and recipe %}
         <a class="btn btn-danger" id="delete-button" href="{% url 'recipe_remove' pk=recipe.pk %}">
             Slett<span class="glyphicon glyphicon-remove"></span></a>
+    {% elif recipe%}
+        <a href="{% url 'login' %}" class="top-menu">
+            <span class="glyphicon glyphicon-lock"></span></a>
     {% endif %}
 
 {% endblock %}

@@ -76,6 +76,36 @@ body {
     padding: 20px 20px 20px 50px;
 }
 
+#header-lock {
+    color: #eee;
+}
+
+#header-login {
+    color: #eee;
+    font-size: 20px;
+    font-family: sans-serif;
+    float: right;
+}
+
+#header-login:hover {
+    color: #ddd;
+}
+
+.glyphicon-lock {
+    margin-top: 28px;
+}
+
+#logout-text {
+    color: #eee;
+    font-family: sans-serif;
+        float: right;
+}
+
+#logout-text:hover {
+    color: #ddd;
+}
+
+
 /* INDEX STYLE */
 
 #show-all-button {
@@ -109,4 +139,19 @@ body {
 
 .glyphicon-ok {
     margin-left: 5px;
+}
+
+.glyphicon-lock.common {
+    color: #ffa221;
+    margin-left: 5px;
+}
+
+.login-anchor {
+    color: #ffa221;
+    font-size: 20px;
+}
+
+.login-anchor:hover {
+    color: #d88f29;
+    font-size: 20px;
 }

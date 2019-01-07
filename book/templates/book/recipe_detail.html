@@ -32,6 +32,9 @@
     {% if user.is_authenticated %}
         <a class="btn btn-default" id="edit-button" href="{% url 'recipe_edit' pk=recipe.pk %}">
             Rediger<span class="glyphicon glyphicon-pencil"></span></a>
+    {% else %}
+        <a href="{% url 'login' %}" class="login-anchor">
+            Logg inn<span class="glyphicon glyphicon-lock common"></span></a>
     {% endif %}
 
 </div>

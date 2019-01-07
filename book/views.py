@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
 from .models import Recipe
 from django.utils import timezone
 from .forms import RecipeForm
@@ -22,6 +23,7 @@ def recipe_detail(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     return render(request, 'book/recipe_detail.html', {'recipe': recipe})
 
+@login_required
 def recipe_new(request):
     if request.method == "POST":
         form = RecipeForm(request.POST)
@@ -35,6 +37,7 @@ def recipe_new(request):
         form = RecipeForm()
     return render(request, 'book/recipe_edit.html', {'form': form})
 
+@login_required
 def recipe_edit(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     if request.method == "POST":
@@ -49,6 +52,7 @@ def recipe_edit(request, pk):
         form = RecipeForm(instance=recipe)
     return render(request, 'book/recipe_edit.html', {'form': form, 'recipe': recipe})
 
+@login_required
 def recipe_remove(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     recipe.delete()
