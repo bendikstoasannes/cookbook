@@ -1,6 +1,6 @@
 from django import forms
 from django.db import models
-from .models import Recipe
+from .models import Recipe, Comment
 
 class RecipeForm(forms.ModelForm):
     class Meta:
@@ -24,4 +24,21 @@ class RecipeForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Skriv inn fremgangsmåte...',
                 'rows': 8})
+        }
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('author', 'text')
+        labels = {'author': 'Forfatter',
+                  'text': 'Kommentartekst'}
+        widgets = {
+            'author': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Skriv inn navn...'
+            }),
+            'text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'placeholder': 'Skriv inn kommentartekst...'
+            })
         }

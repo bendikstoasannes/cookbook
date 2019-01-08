@@ -19,3 +19,18 @@ class Recipe(models.Model):
     def publish(self):
         self.published_date = timezone.now()
         self.save()
+
+
+class Comment(models.Model):
+    recipe = models.ForeignKey('book.Recipe', on_delete=models.CASCADE, related_name='comments')
+    author = models.CharField(max_length=200)
+    text = models.TextField(default='')
+    created_date = models.DateTimeField(default=timezone.now())
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
+

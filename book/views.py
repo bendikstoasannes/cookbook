@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Recipe
 from django.utils import timezone
-from .forms import RecipeForm
+from .forms import RecipeForm, CommentForm
 
 # Create your views here.
 
@@ -57,3 +57,16 @@ def recipe_remove(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     recipe.delete()
     return redirect('recipe_list')
+
+def add_comment_to_recipe(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.recipe = recipe
+            comment.save()
+            return redirect('recipe_detail', pk=recipe.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'book/comment_to_recipe.html', {'form': form})
