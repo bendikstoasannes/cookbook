@@ -173,3 +173,14 @@ hr {
 #add-comment-button {
     margin-bottom: 70px;
 }
+
+/* SEARCH STYLE */
+
+.search_form {
+
+}
+
+.search_text {
+    padding: 10px;
+    width: 100%;
+}
