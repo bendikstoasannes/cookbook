@@ -47,6 +47,7 @@ def recipe_edit(request, pk):
             recipe.author = request.user
             recipe.published_date = timezone.now()
             recipe.save()
+            form.save_m2m()
             return redirect('recipe_detail', pk=recipe.pk)
     else:
         form = RecipeForm(instance=recipe)

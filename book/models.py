@@ -4,11 +4,20 @@ from django.utils import timezone
 
 # Create your models here.
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name='kategori')
+
+    def __str__(self):
+        return self.name
+
+
 class Recipe(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, verbose_name='overskrift')
     ingredients = models.TextField(default="", verbose_name='ingredienser')
     instructions = models.TextField(default="", verbose_name='framgangsmate')
+    categories = models.ManyToManyField(Category, default=None, verbose_name='kategori')
 
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)

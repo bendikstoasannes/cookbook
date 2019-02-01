@@ -1,14 +1,17 @@
 from django import forms
 from django.db import models
-from .models import Recipe, Comment
+from .models import Recipe, Comment, Category
+
 
 class RecipeForm(forms.ModelForm):
+
     class Meta:
         model = Recipe
-        fields = ('title', 'ingredients', 'instructions',)
+        fields = ('title', 'ingredients', 'instructions', 'categories')
         labels = {'title': 'Tittel',
                   'ingredients': 'Ingredienser',
-                  'instructions': 'Fremgangsmåte'
+                  'instructions': 'Fremgangsmåte',
+                  'categories': 'Kategorier'
                   }
         widgets = {
             'title': forms.TextInput(attrs={
@@ -23,8 +26,11 @@ class RecipeForm(forms.ModelForm):
             'instructions': forms.Textarea(attrs={
                 'class': 'form-control',
                 'placeholder': 'Skriv inn fremgangsmåte...',
-                'rows': 8})
+                'rows': 8}),
+
+            'categories': forms.CheckboxSelectMultiple()
         }
+
 
 class CommentForm(forms.ModelForm):
     class Meta:

@@ -20,6 +20,11 @@
                 </ul>
             <h4>Fremgangsmåte</h4>
             <p>{{ recipe.instructions | linebreaks}}</p>
+            <div class="categories">
+                {% for category in recipe.categories.all %}
+                    <button class="btn btn-primary disabled">{{ category }}</button>
+                {% endfor %}
+            </div>
         </div>
     {% endfor %}
 

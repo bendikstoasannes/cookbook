@@ -29,6 +29,12 @@
         <p>{{ recipe.instructions | linebreaks}}</p>
     </div>
 
+    <div class="categories">
+        {% for category in recipe.categories.all %}
+                <button class="btn btn-primary disabled">{{ category }}</button>
+        {% endfor %}
+    </div>
+
     {% if user.is_authenticated %}
         <a class="btn btn-default" id="edit-button" href="{% url 'recipe_edit' pk=recipe.pk %}">
             Rediger<span class="glyphicon glyphicon-pencil"></span></a>
