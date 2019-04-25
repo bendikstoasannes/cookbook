@@ -9,16 +9,13 @@
     {% endif %}
     <form method="POST">{% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="save btn btn-success">
-            Lagre<span class="glyphicon glyphicon-ok"></span></button>
+        <input class="btn" type="submit" value="Lagre">
     </form>
 
     {% if user.is_authenticated and recipe %}
-        <a class="btn btn-danger" id="delete-button" href="{% url 'recipe_remove' pk=recipe.pk %}">
-            Slett<span class="glyphicon glyphicon-remove"></span></a>
-    {% elif recipe%}
-        <a href="{% url 'login' %}" class="top-menu">
-            <span class="glyphicon glyphicon-lock"></span></a>
+        <a href="{% url 'book:recipe_remove' pk=recipe.pk %}">Slett</a>
+    {% elif recipe %}
+        <a href="{% url 'book:login' %}">Slett</a>
     {% endif %}
 
 {% endblock %}

@@ -1,20 +1,10 @@
 {% extends 'book/base.html' %}
 
 {% block content %}
-
-  <form class="search_form" name="search_form" method="GET" action="{% url 'search_recipe' %}">
-    <input class="search_text" type="text" name="recipe_search" placeholder="Søk etter oppskrifter...">
-  </form>
-
-  {% if message %}
-    <div class="categories">
-      <h4>{{ message }}</h4>
-    </div>
-  {% endif %}
-
+  <strong>Alle oppskrifter</strong>
   {% for recipe in recipes %}
     <div class="recipe">
-      <h2><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ recipe.title }}</a></h2>
+      <a href="{% url 'book:recipe_detail' pk=recipe.pk %}">{{ recipe.title }}</a>
     </div>
   {% endfor %}
 {% endblock %}

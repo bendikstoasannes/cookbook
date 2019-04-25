@@ -2,23 +2,18 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.utils import timezone
-from .models import Recipe
+from dal import autocomplete
+from .models import Recipe, Category
 from .forms import RecipeForm, CommentForm
-
-# Create your views here.
 
 
 def index(request):
-    recipes = Recipe.objects.filter(published_date__lte=timezone.now()).order_by('published_date').reverse()
+    recipes = Recipe.objects.filter(published_date__lte=timezone.now()).\
+        order_by('published_date').reverse()
     count = recipes.count()
-    if len(recipes) <= 5:
-        return render(request, 'book/index.html', {'recipes': recipes,
-                                                   'count': count,
-                                                   })
-    else:
-        return render(request, 'book/index.html', {'recipes': recipes[:5],
-                                                   'count': count,
-                                                   })
+    context = {"recipes": recipes,
+               "count": count}
+    return render(request, 'book/index.html', context)
 
 
 def search_recipe(request):
@@ -62,7 +57,7 @@ def recipe_new(request):
             recipe.author = request.user
             recipe.published_date = timezone.now()
             recipe.save()
-            return redirect('recipe_detail', pk=recipe.pk)
+            return redirect('book:recipe_detail', pk=recipe.pk)
     else:
         form = RecipeForm()
     return render(request, 'book/recipe_edit.html', {'form': form})
@@ -79,7 +74,7 @@ def recipe_edit(request, pk):
             recipe.published_date = timezone.now()
             recipe.save()
             form.save_m2m()
-            return redirect('recipe_detail', pk=recipe.pk)
+            return redirect('book:recipe_detail', pk=recipe.pk)
     else:
         form = RecipeForm(instance=recipe)
     return render(request, 'book/recipe_edit.html', {'form': form,
@@ -90,7 +85,7 @@ def recipe_edit(request, pk):
 def recipe_remove(request, pk):
     recipe = get_object_or_404(Recipe, pk=pk)
     recipe.delete()
-    return redirect('recipe_list')
+    return redirect('book:recipe_list')
 
 
 def add_comment_to_recipe(request, pk):
@@ -101,7 +96,19 @@ def add_comment_to_recipe(request, pk):
             comment = form.save(commit=False)
             comment.recipe = recipe
             comment.save()
-            return redirect('recipe_detail', pk=recipe.pk)
+            return redirect('book:recipe_detail', pk=recipe.pk)
     else:
         form = CommentForm()
     return render(request, 'book/comment_to_recipe.html', {'form': form})
+
+
+class CategoryAutocomplete(autocomplete.Select2QuerySetView):
+    def get_queryset(self):
+        if not self.request.user.is_authenticated():
+            return Category.objects.none()
+
+        qs = Category.objects.all()
+        if self.q:
+            qs = qs.filter(name__istartswqith=self.q)
+
+        return qs

@@ -1,6 +1,6 @@
 from django import forms
-from django.db import models
-from .models import Recipe, Comment, Category
+from dal import autocomplete
+from .models import Recipe, Comment
 
 
 class RecipeForm(forms.ModelForm):
@@ -14,21 +14,7 @@ class RecipeForm(forms.ModelForm):
                   'categories': 'Kategorier'
                   }
         widgets = {
-            'title': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Skriv inn tittel...'}),
-
-            'ingredients': forms.Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Skriv inn ingredienser...',
-                'rows': 8}),
-
-            'instructions': forms.Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Skriv inn fremgangsmåte...',
-                'rows': 8}),
-
-            'categories': forms.CheckboxSelectMultiple()
+            'categories': autocomplete.ModelSelect2Multiple(url='book:category-autocomplete')
         }
 
 
@@ -38,13 +24,3 @@ class CommentForm(forms.ModelForm):
         fields = ('author', 'text')
         labels = {'author': 'Forfatter',
                   'text': 'Kommentartekst'}
-        widgets = {
-            'author': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Skriv inn navn...'
-            }),
-            'text': forms.Textarea(attrs={
-                'class': 'form-control',
-                'placeholder': 'Skriv inn kommentartekst...'
-            })
-        }

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  <h1>Ny kommentar</h1>
+  <h5>Ny kommentar</h5>
   <form method="POST" class="post-form">{% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="save btn btn-success">Legg til kommentar</button>

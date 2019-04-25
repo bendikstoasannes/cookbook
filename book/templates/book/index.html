@@ -2,47 +2,13 @@
 
 {% block content %}
 
-  <form class="search_form" name="search_form" method="GET" action="{% url 'search_recipe' %}">
-    <input class="search_text" type="text" name="recipe_search" placeholder="Søk etter oppskrifter...">
-  </form>
+  <h3>Velkommen til kokeboka</h3>
 
-  {% if message %}
-    <div class="categories">
-      <h4>{{ message }}</h4>
-    </div>
-  {% endif %}
-
+  <strong>Oppskrifter:</strong><br><br>
   {% for recipe in recipes %}
-    <div class="recipe">
-      <h2><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ recipe.title }}</a></h2>
-      <div class="date">
-        <p>Publisert {{ recipe.published_date }}</p>
-      </div>
-      <h4>Ingredienser</h4>
-      <ul>
-        {% for ingredient in recipe.ingredients.splitlines %}
-          {% if ingredient != "" %}
-            <li>{{ ingredient }}</li>
-          {% else %}
-            <br>
-          {% endif %}
-        {% endfor %}
-      </ul>
-      <h4>Fremgangsmåte</h4>
-      <p>{{ recipe.instructions | linebreaks }}</p>
-      <div class="categories">
-        {% for category in recipe.categories.all %}
-          <button class="btn btn-primary disabled">{{ category }}</button>
-        {% endfor %}
-      </div>
-    </div>
+    <a href="{% url "book:recipe_detail" recipe.pk %}"> {{ recipe }}</a><br>
+  {% empty %}
+    Ingen Recipes
   {% endfor %}
-
-  <div>
-    <a href="{% url 'recipe_list' %}">
-      <button class="btn btn-lg btn-default" id="show-all-button">Vis alle {{ count }} oppskrifter
-        <span class="glyphicon glyphicon-arrow-right"></span></button>
-    </a>
-  </div>
 
 {% endblock %}

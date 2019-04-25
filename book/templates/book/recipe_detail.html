@@ -1,63 +1,46 @@
 {% extends 'book/base.html' %}
 
 {% block content %}
-  <div class="recipe">
 
-    <h2>{{ recipe.title }}</h2>
+  <h4>{{ recipe.title }}</h4>
 
-    {% if recipe.published_date %}
-      <div class="date">
-        <p>Publisert {{ recipe.published_date }}</p>
-      </div>
-    {% endif %}
+  {% if recipe.published_date %}
+    <p>Publisert {{ recipe.published_date }}</p>
+  {% endif %}
 
-    <div class="ingredients">
-      <h4>Ingredienser</h4>
-      <ul>
-        {% for ingredient in recipe.ingredients.splitlines %}
-          {% if ingredient != "" %}
-            <li>{{ ingredient }}</li>
-          {% else %}
-            <br>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </div>
+  <h5>Ingredienser</h5>
+  <ul>
+    {% for ingredient in recipe.ingredients.splitlines %}
+      {{ ingredient }}<br>
+    {% endfor %}
+  </ul>
 
-    <h4>Fremgangsmåte</h4>
-    <div class="instructions">
-      <p>{{ recipe.instructions | linebreaks }}</p>
-    </div>
+  <h5>Fremgangsmåte</h5>
+  <p>{{ recipe.instructions | linebreaks }}</p>
 
-    <div class="categories">
-      {% for category in recipe.categories.all %}
-        <button class="btn btn-primary disabled">{{ category }}</button>
-      {% endfor %}
-    </div>
+  Kategorier:
+  {% for category in recipe.categories.all %}
+    {{ category }}
+  {% endfor %}
 
-    {% if user.is_authenticated %}
-      <a class="btn btn-default" id="edit-button" href="{% url 'recipe_edit' pk=recipe.pk %}">
-        Rediger<span class="glyphicon glyphicon-pencil"></span></a>
-    {% else %}
-      <a href="{% url 'login' %}" class="login-anchor">
-        Logg inn<span class="glyphicon glyphicon-lock common"></span></a>
-    {% endif %}
+  {% if user.is_authenticated %}
+    Endre Recipe
+  {% else %}
+    Du må logge inn for å endre Recipe
+  {% endif %}
 
-  </div>
 
   <hr>
 
   {% for comment in recipe.comments.all %}
-    <div class="comment">
-      <div class="date">{{ comment.created_date }}</div>
-      <strong>{{ comment.author }}</strong>
-      <p>{{ comment.text|linebreaks }}</p>
-    </div>
+    {{ comment.created_date }}
+    <strong>{{ comment.author }}</strong>
+    <p>{{ comment.text|linebreaks }}</p>
   {% empty %}
-    <p id="no-comment-text">Ingen kommentarer er lagt til enda...</p>
-  {% endfor %}
+    Ingen kommentarer er lagt til enda...
+  {% endfor %}<br>
 
-  <a href="{% url 'add_comment_to_recipe' pk=recipe.pk %}"
+  <a href="{% url 'book:add_comment_to_recipe' pk=recipe.pk %}"
      class="btn btn-default" id="add-comment-button">Legg til kommentar</a>
 
 {% endblock %}
