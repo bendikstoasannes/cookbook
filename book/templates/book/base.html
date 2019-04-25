@@ -2,46 +2,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/book.css' %}">
-    <meta charset="UTF-8">
-    <title>Kokeboka</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/book.css' %}">
+  <meta charset="UTF-8">
+  <title>Kokeboka</title>
 </head>
 <body>
 
 <div class="page-header">
-    <div class="row">
-        <div class="col-md-3">
-            <h1><a href="{% url 'index' %}">KOKEBOKA</a></h1>
-        </div>
-        <div class="col-md-3">
-            {% if user.is_authenticated %}
-                <a href="{% url 'recipe_new' %}" class="top-menu">
-                    <span class="glyphicon glyphicon-plus"></span></a>
-            {% else %}
-                <a href="{% url 'login' %}" class="top-menu" id="header-login">Logg inn
-                <span class="glyphicon glyphicon-lock" id="header-lock"></span></a>
-            {% endif %}
-        </div>
+  <div class="row">
+    <div class="col-md-3">
+      <h1><a href="{% url 'index' %}">KOKEBOKA</a></h1>
     </div>
-    <div class="row">
-        <div class="col-md-6">
-        {% if user.is_authenticated %}
-            <p class="top-menu "><small><a href="{% url 'logout' %}" id="logout-text">Logg ut</a></small></p>
-        {% endif %}
-        </div>
+    <div class="col-md-3">
+      {% if user.is_authenticated %}
+        <a href="{% url 'recipe_new' %}" class="top-menu">
+          <span class="glyphicon glyphicon-plus"></span></a>
+      {% else %}
+        <a href="{% url 'login' %}" class="top-menu" id="header-login">Logg inn
+          <span class="glyphicon glyphicon-lock" id="header-lock"></span></a>
+      {% endif %}
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      {% if user.is_authenticated %}
+        <p class="top-menu ">
+          <small><a href="{% url 'logout' %}" id="logout-text">Logg ut</a></small>
+        </p>
+      {% endif %}
+    </div>
+  </div>
 </div>
 
 <div class="content container">
-    <div class="row">
-        <div class="col-md-8">
-            {% block content %}
-            {% endblock %}
-        </div>
+  <div class="row">
+    <div class="col-md-8">
+      {% block content %}
+      {% endblock %}
     </div>
+  </div>
 </div>
 </body>
 </html>
