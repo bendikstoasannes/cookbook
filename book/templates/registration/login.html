@@ -2,24 +2,24 @@
 
 {% block content %}
 
-    {% if form.errors %}
-        <p>Brukernavn eller passord stemmer ikke. Vennligst prøv igjen</p>
-    {% endif %}
+  {% if form.errors %}
+    <p>Brukernavn eller passord stemmer ikke. Vennligst prøv igjen</p>
+  {% endif %}
 
-    <form method="POST" action="{% url 'login' %}">{% csrf_token %}
-        <table>
-            <tr>
-                <td>Brukernavn: </td>
-                <td>{{ form.username }}</td>
-            </tr>
-            <tr>
-                <td>Passord: </td>
-                <td>{{ form.password }}</td>
-            </tr>
-        </table>
+  <form method="POST" action="{% url 'login' %}">{% csrf_token %}
+    <table>
+      <tr>
+        <td>Brukernavn:</td>
+        <td>{{ form.username }}</td>
+      </tr>
+      <tr>
+        <td>Passord:</td>
+        <td>{{ form.password }}</td>
+      </tr>
+    </table>
 
-        <input type="submit" value="Logg inn" />
-        <input type="hidden" name="next" value="{{ next }}" />
-    </form>
+    <input type="submit" value="Logg inn"/>
+    <input type="hidden" name="next" value="{{ next }}"/>
+  </form>
 
 {% endblock %}

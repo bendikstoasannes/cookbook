@@ -1,4 +1,5 @@
 {% extends 'book/base.html' %}
+{% load static %}
 
 {% block content %}
     {% if recipe %}
@@ -20,4 +21,10 @@
             <span class="glyphicon glyphicon-lock"></span></a>
     {% endif %}
 
+{% endblock %}
+
+{% block footer %}
+<script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
+
+{{ form.media }}
 {% endblock %}
