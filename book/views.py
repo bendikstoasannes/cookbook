@@ -3,16 +3,14 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.utils import timezone
 from dal import autocomplete
+import random
 from .models import Recipe, Category
 from .forms import RecipeForm, CommentForm
 
 
 def index(request):
-    recipes = Recipe.objects.filter(published_date__lte=timezone.now()).\
-        order_by('published_date').reverse()
-    count = recipes.count()
-    context = {"recipes": recipes,
-               "count": count}
+    random_recipe = random.choice(Recipe.objects.all())
+    context = {"random_recipe": random_recipe}
     return render(request, 'book/index.html', context)
 
 
@@ -39,8 +37,10 @@ def search_recipe(request):
 
 
 def recipe_list(request):
+    # Pagination for all recipes
     recipes = Recipe.objects.filter(published_date__lte=timezone.now()).order_by('title')
-    return render(request, 'book/recipe_list.html', {'recipes': recipes})
+    context = {"recipes": recipes}
+    return render(request, 'book/recipe_list.html', context)
 
 
 def recipe_detail(request, pk):

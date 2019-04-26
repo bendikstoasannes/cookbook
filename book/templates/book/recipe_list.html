@@ -1,5 +1,9 @@
 {% extends 'book/base.html' %}
 
+{% block breadcrumbs %}
+  <a class="breadcrumb">Alle oppskrifter</a>
+{% endblock breadcrumbs %}
+
 {% block content %}
   <strong>Alle oppskrifter</strong>
   {% for recipe in recipes %}

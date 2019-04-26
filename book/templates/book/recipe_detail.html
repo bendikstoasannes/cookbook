@@ -1,5 +1,10 @@
 {% extends 'book/base.html' %}
 
+{% block breadcrumbs %}
+  <a href="{% url "book:recipe_list" %}" class="breadcrumb">Alle oppskrifter</a>
+  <a class="breadcrumb">Detaljer</a>
+{% endblock breadcrumbs %}
+
 {% block content %}
 
   <h4>{{ recipe.title }}</h4>
