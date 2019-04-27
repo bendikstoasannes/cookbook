@@ -25,9 +25,10 @@
         </a>
       </div>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="#"><i class="material-icons left">search</i>Søk</a></li>
-        <li><a href="#"><i class="material-icons left">folder</i>Kategorier</a></li>
-        <li><a href="{% url "book:recipe_list" %}"><i class="material-icons left">format_list_bulleted</i>Alle oppskrifter</a></li>
+        <li><a href="{% url "book:recipe_list" %}"><i class="material-icons left">format_list_bulleted</i>
+          Alle oppskrifter</a></li>
+        <li><a href="{% url "book:category_list" %}"><i class="material-icons left">folder</i>
+          Kategorier</a></li>
         {% if user.is_authenticated %}
           <li><a href="{% url "book:logout" %}">
             <i class="material-icons left">person</i>Logg ut {{ user }}</a></li>

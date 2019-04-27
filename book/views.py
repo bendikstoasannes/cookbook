@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.utils import timezone
@@ -100,6 +100,12 @@ def add_comment_to_recipe(request, pk):
     else:
         form = CommentForm()
     return render(request, 'book/comment_to_recipe.html', {'form': form})
+
+
+def category_list(request):
+    categories = Category.objects.all()
+    context = {"categories": categories}
+    return render(request, "book/category_list.html", context)
 
 
 class CategoryAutocomplete(autocomplete.Select2QuerySetView):

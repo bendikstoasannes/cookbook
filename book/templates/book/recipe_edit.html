@@ -3,8 +3,12 @@
 
 {% block breadcrumbs %}
   <a href="{% url "book:recipe_list" %}" class="breadcrumb">Alle oppskrifter</a>
+  {% if recipe %}
   <a href="{% url "book:recipe_detail" recipe.pk %}" class="breadcrumb">Detaljer</a>
   <a class="breadcrumb">Rediger</a>
+  {% else %}
+    <a class="breadcrumb">Ny</a>
+  {% endif %}
 {% endblock breadcrumbs %}
 
 {% block content %}
