@@ -5,7 +5,29 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-  <strong>Alle oppskrifter</strong>
+  <h4>Alle oppskrifter</h4>
+
+  <ul class="pagination">
+    {% if recipes.has_previous %}
+      <li><a href="{{ recipes.previous_page_number }}">
+        <i class="material-icons">chevron_left</i></a></li>
+    {% else %}
+      <li class="disabled"><a href="#">
+        <i class="material-icons">chevron_left</i></a></li>
+    {% endif %}
+    {% for page in recipes.paginator.page_range %}
+      <li class="{% if recipes.number == page %}active blue-grey darken-2{% endif %}"><a
+              href="{{ page }}">{{ page }}</a></li>
+    {% endfor %}
+    {% if recipes.has_next %}
+      <li><a href="{{ recipes.next_page_number }}">
+        <i class="material-icons">chevron_right</i></a></li>
+    {% else %}
+      <li class="disabled"><a href="#">
+        <i class="material-icons">chevron_right</i></a></li>
+    {% endif %}
+  </ul>
+
   {% for recipe in recipes %}
     <div class="recipe">
       <a href="{% url 'book:recipe_detail' pk=recipe.pk %}">{{ recipe.title }}</a>

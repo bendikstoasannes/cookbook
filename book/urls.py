@@ -11,7 +11,8 @@ login_urls = [
 
 recipe_urls = [
     path('', views.index, name='index'),
-    path('oppskrifter', views.recipe_list, name='recipe_list'),
+    path('oppskrifter/', views.recipe_list, name='recipe_list'),
+    path('oppskrifter/<int:page>', views.recipe_list, name='detail'),
     path('oppskrifter/<int:pk>/', views.recipe_detail, name='recipe_detail'),
     path('oppskrifter/ny', views.recipe_new, name='recipe_new'),
     path('oppskrifter/<int:pk>/rediger', views.recipe_edit, name='recipe_edit'),

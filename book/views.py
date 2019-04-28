@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.utils import timezone
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from dal import autocomplete
 import random
 from .models import Recipe, Category
@@ -36,9 +37,17 @@ def search_recipe(request):
                                                    'count': count})
 
 
-def recipe_list(request):
-    # Pagination for all recipes
-    recipes = Recipe.objects.filter(published_date__lte=timezone.now()).order_by('title')
+def recipe_list(request, page=1):
+    recipes_list = Recipe.objects.filter(published_date__lte=timezone.now()).order_by('title')
+    paginator = Paginator(recipes_list, 3)
+
+    try:
+        recipes = paginator.page(page)
+    except PageNotAnInteger:
+        recipes = paginator.page(1)
+    except EmptyPage:
+        recipes = paginator.page(paginator.num_pages)
+
     context = {"recipes": recipes}
     return render(request, 'book/recipe_list.html', context)
 
