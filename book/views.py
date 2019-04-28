@@ -39,7 +39,7 @@ def search_recipe(request):
 
 def recipe_list(request, page=1):
     recipes_list = Recipe.objects.filter(published_date__lte=timezone.now()).order_by('title')
-    paginator = Paginator(recipes_list, 3)
+    paginator = Paginator(recipes_list, 6)
 
     try:
         recipes = paginator.page(page)
