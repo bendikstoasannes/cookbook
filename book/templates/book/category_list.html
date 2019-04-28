@@ -1,0 +1,16 @@
+{% extends "book/base.html" %}
+
+{% block breadcrumbs %}
+  <a class="breadcrumb">Alle kategorier</a>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    {% for category in categories %}
+      <br>
+      <div class="chip blue-grey darken-2 white-text">
+        {{ category }}
+      </div><br>
+    {% empty %}
+      Det finnes ingen kategorier enda :( Lag en, da vel!
+    {% endfor %}
+{% endblock content %}
