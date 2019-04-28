@@ -1,6 +1,6 @@
 from django import forms
 from dal import autocomplete
-from .models import Recipe, Comment
+from .models import Recipe, Comment, Category
 
 
 class RecipeForm(forms.ModelForm):
@@ -24,3 +24,9 @@ class CommentForm(forms.ModelForm):
         fields = ('author', 'text')
         labels = {'author': 'Forfatter',
                   'text': 'Kommentartekst'}
+
+
+class CategoryForm(forms.ModelForm):
+    class Meta:
+        model = Category
+        fields = '__all__'

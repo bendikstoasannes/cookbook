@@ -22,6 +22,7 @@ recipe_urls = [
 
 category_urls = [
     path('kategorier', views.category_list, name="category_list"),
+    path('kategorier/ny', views.create_category, name='create_category'),
     path('category-autocomplete/', views.CategoryAutocomplete.as_view(), name='category-autocomplete')
 ]
 

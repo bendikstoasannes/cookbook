@@ -5,12 +5,23 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
+  <h4>Kategorier</h4>
+  <br>
+  <a href="{% url "book:create_category" %}" class="btn blue-grey">
+    <i class="material-icons left">add</i>Ny kategori
+  </a>
+  <div class="row">
+    <br>
+    <hr>
+    <br><br>
     {% for category in categories %}
-      <br>
-      <div class="chip blue-grey darken-2 white-text">
-        {{ category }}
-      </div><br>
+      <div class="col l2">
+        <div class="chip blue-grey darken-2 white-text">
+          {{ category }}
+        </div>
+      </div>
     {% empty %}
+      </div>
       Det finnes ingen kategorier enda :( Lag en, da vel!
     {% endfor %}
 {% endblock content %}

@@ -1,11 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.utils import timezone
 from dal import autocomplete
 import random
 from .models import Recipe, Category
-from .forms import RecipeForm, CommentForm
+from .forms import RecipeForm, CommentForm, CategoryForm
 
 
 def index(request):
@@ -103,9 +103,19 @@ def add_comment_to_recipe(request, pk):
 
 
 def category_list(request):
-    categories = Category.objects.all()
+    categories = Category.objects.all().order_by("name")
     context = {"categories": categories}
     return render(request, "book/category_list.html", context)
+
+
+def create_category(request):
+    form = CategoryForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect("book:category_list")
+
+    context = {"form": form}
+    return render(request, "book/category_new.html", context)
 
 
 class CategoryAutocomplete(autocomplete.Select2QuerySetView):

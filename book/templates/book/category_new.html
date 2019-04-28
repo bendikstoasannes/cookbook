@@ -1,0 +1,15 @@
+{% extends "book/base.html" %}
+
+{% block breadcrumbs %}
+  <a href="{% url "book:category_list" %}" class="breadcrumb">Alle kategorier</a>
+  <a class="breadcrumb">Ny kategori</a>
+{% endblock breadcrumbs %}
+
+{% block content %}
+  <form method="POST">
+    {{ form.as_p }}
+    <button type="submit" class="btn blue-grey">{% csrf_token %}
+      <i class="material-icons left">check</i>Lagre
+    </button>
+  </form>
+{% endblock content %}
