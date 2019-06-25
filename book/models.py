@@ -1,8 +1,7 @@
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
-
-# Create your models here.
+from ckeditor.fields import RichTextField
 
 
 class Category(models.Model):
@@ -15,8 +14,8 @@ class Category(models.Model):
 class Recipe(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     title = models.CharField(max_length=200, verbose_name='overskrift')
-    ingredients = models.TextField(default="", verbose_name='ingredienser')
-    instructions = models.TextField(default="", verbose_name='framgangsmate')
+    ingredients = RichTextField(verbose_name='ingredienser', config_name='default')
+    instructions = RichTextField(default="", verbose_name='framgangsmate')
     categories = models.ManyToManyField(Category, default=None, verbose_name='kategori')
 
     created_date = models.DateTimeField(default=timezone.now)

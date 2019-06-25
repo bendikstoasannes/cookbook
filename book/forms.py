@@ -1,5 +1,4 @@
 from django import forms
-from dal import autocomplete
 from .models import Recipe, Comment, Category
 
 
@@ -14,7 +13,7 @@ class RecipeForm(forms.ModelForm):
                   'categories': 'Kategorier'
                   }
         widgets = {
-            'categories': autocomplete.ModelSelect2Multiple(url='book:category-autocomplete')
+            'categories': forms.CheckboxSelectMultiple()
         }
 
 

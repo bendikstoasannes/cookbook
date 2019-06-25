@@ -37,9 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'book',
+    'djrichtextfield',
+    'ckeditor',
+    'ckeditor_uploader',
     'dal',
-    'dal_select2'
+    'dal_select2',
+    'material',
+    'book'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +57,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'cookbook.urls'
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 TEMPLATES = [
     {

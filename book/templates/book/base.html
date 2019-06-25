@@ -11,10 +11,11 @@
 </head>
 <body>
 
-<style>
-  {% block extra_css %}
-  {% endblock %}
-</style>
+{% include 'material/includes/material_css.html' %}
+{% include 'material/includes/material_js.html' %}
+
+{% block extra_css %}
+{% endblock %}
 
 <nav class="nav-extended">
   <div class="nav-wrapper">

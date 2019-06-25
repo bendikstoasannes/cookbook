@@ -1,11 +1,12 @@
 {% extends 'book/base.html' %}
 {% load static %}
+{% load material_form %}
 
 {% block breadcrumbs %}
   <a href="{% url "book:recipe_list" %}" class="breadcrumb">Alle oppskrifter</a>
   {% if recipe %}
-  <a href="{% url "book:recipe_detail" recipe.pk %}" class="breadcrumb">Detaljer</a>
-  <a class="breadcrumb">Rediger</a>
+    <a href="{% url "book:recipe_detail" recipe.pk %}" class="breadcrumb">Detaljer</a>
+    <a class="breadcrumb">Rediger</a>
   {% else %}
     <a class="breadcrumb">Ny</a>
   {% endif %}
@@ -18,8 +19,27 @@
     <h2>Ny oppskrift</h2>
   {% endif %}
   <form method="POST">{% csrf_token %}
-    {{ form.as_p }}
-    <input class="btn" type="submit" value="Lagre">
+    {{ form.media }}
+    <h6>{{ form.title.label }}:</h6>
+    {{ form.title }}
+    <h6>{{ form.ingredients.label }}:</h6>
+    {{ form.ingredients }}
+    <h6>{{ form.instructions.label }}:</h6>
+    {{ form.instructions }}
+    <h6>{{ form.categories.label }}:</h6>
+  </form>
+  {% for option in form.categories %}
+    <div>
+      <br>
+      <label>
+        <input type="checkbox">
+        <span>{{ option }}</span>
+      </label>
+      <br>
+    </div>
+  {% endfor %}
+  <br>
+  <input class="btn" type="submit" value="Lagre">
   </form>
 
   {% if user.is_authenticated and recipe %}
@@ -28,10 +48,10 @@
     <a href="{% url 'book:login' %}">Slett</a>
   {% endif %}
 
-{% endblock %}
+{% endblock content %}
 
 {% block footer %}
   <script type="text/javascript" src="{% static 'admin/js/vendor/jquery/jquery.js' %}"></script>
 
   {{ form.media }}
-{% endblock %}
+{% endblock footer %}

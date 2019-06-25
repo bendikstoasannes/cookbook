@@ -10,7 +10,10 @@ from .forms import RecipeForm, CommentForm, CategoryForm
 
 
 def index(request):
-    random_recipe = random.choice(Recipe.objects.all())
+    try:
+        random_recipe = random.choice(Recipe.objects.all())
+    except IndexError:
+        random_recipe = Recipe.objects.none()
     context = {"random_recipe": random_recipe}
     return render(request, 'book/index.html', context)
 
@@ -66,6 +69,7 @@ def recipe_new(request):
             recipe.author = request.user
             recipe.published_date = timezone.now()
             recipe.save()
+            form.save_m2m()
             return redirect('book:recipe_detail', pk=recipe.pk)
     else:
         form = RecipeForm()
