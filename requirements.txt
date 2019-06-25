@@ -1,0 +1,7 @@
+Django==2.0.9
+django-autocomplete-light==3.3.2
+django-ckeditor==5.7.0
+django-js-asset==1.2.2
+django-material==1.5.5
+django-richtextfield==1.4.0
+pytz==2018.7
